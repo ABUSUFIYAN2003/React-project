@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Admin Panel - User List</title>
     <link rel="stylesheet" href="public/styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
 
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .textstyle {
+    background-color: rgb(230, 195, 195); /* Changing background color */
+    font-weight: bold; /* Making font bold */
+    border-radius: 20px; /* Making border radius */
+    width: auto; /* Making auto-sizable width */
+    height: 100px; /* Making auto-sizable height */
+    padding: 1px 20px 1px 20px; /* Making space around letters */
+    font-size: 18px; /* Changing font size */
+}
         h1 {
-            background-color: #007BFF;
-            color: #fff;
+            color: #000000;
             padding: 20px;
             text-align: center;
+            font-size: 35px;
+            margin-bottom: 20px;
         }
 
         ul {
@@ -26,17 +44,20 @@
         }
 
         li {
-            background-color: #fff;
+            background-color: #dabfbf;
             margin: 10px 0;
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         li a {
             text-decoration: none;
             color: #007BFF;
-            margin-left: 10px;
+            font-weight: bold;
         }
 
         a:hover {
@@ -62,32 +83,39 @@
         }
 
         a.add-link {
-            display: block;
+            font-size: 18px;
+            font-weight: bold;
             text-align: center;
             margin-top: 20px;
             text-decoration: none;
-            background-color: #007BFF;
+            background-color: #0056b3;
             color: #fff;
-            padding: 10px 20px;
+            height: 40px;
+            line-height: 40px;
             border-radius: 3px;
+            display: inline-block;
+            padding: 0 20px;
         }
 
         a.add-link:hover {
-            background-color: #0056b3;
+            background-color: #004699;
         }
     </style>
 </head>
 <body>
-    <h1>User List</h1>
-    <ul>
-        <% users.forEach(function(user) { %>
-            <li>
-                <%= user.email %>
-                <a href="/edit/<%= user._id %>" class="edit-link">Edit</a>
-                <a href="/delete/<%= user._id %>" class="delete-link">Delete</a>
-            </li>
-        <% }); %>
-    </ul>
-    <a href="/add" class="add-link">Add User</a>
+    <H1>ADMIN PANEL</H1>
+    <div class="textstyle"><h1>user list</h1></div>
+    <div class="container"> <!-- Add a container -->
+        <ul>
+            <% users.forEach(function(user) { %>
+                <li>
+                    <%= user.email %>
+                    <a href="/edit/<%= user._id %>" class="edit-link">Edit</a>
+                    <a href="/delete/<%= user._id %>" class="delete-link">Delete</a>
+                </li>
+            <% }); %>
+        </ul>
+        <center><a href="/add" class="add-link">Add User</a></center>
+    </div> <!-- Close the container -->
 </body>
 </html>

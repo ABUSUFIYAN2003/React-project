@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // MongoDB connection URI
-const dbURI = "mongodb+srv://Edi:programimi2023@jwtauth.ru237kk.mongodb.net/";
+const dbURI = "mongodb+srv://sufiyannissam:123@cluster0.fkm8ls4.mongodb.net/?retryWrites=true&w=majority"; // Replace "mydatabase" with your actual database name
 
 // Connect to the MongoDB database
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -24,47 +24,69 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Load User model
 const User = require("./models/User");
 
-// Routes
+// Styling for your pages
 
-// Login page route
-// ...
+// Define a common CSS style
+const commonStyle = `
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+`;
+
+// Add styles for specific pages
+const loginPageStyle = `
+  ${commonStyle}
+  background-color: #f2f2f2;
+`;
+
+const indexPageStyle = `
+  ${commonStyle}
+  background-color: #ffffff;
+  padding: 20px;
+`;
+
+const formStyle = `
+  ${commonStyle}
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`;
 
 // Login page route
 app.get("/login", (req, res) => {
-    res.render("login");
-  });
-  
-  // Handle login POST request at the /login path
-  app.post("/login", (req, res) => {
-    const { username, password } = req.body;
-  
-    // Check if the username and password are correct
-    if (username === "admin" && password === "admin") {
-      // Successful login
-      res.redirect("/"); // Redirect to the "/index" page or any other destination
-    } else {
-      // Failed login
-      res.send("Admin login failed. Please check your credentials.");
-    }
-  });
-  
-  // ...
-  
-  app.get("/", async (req, res) => {
-    try {
-      const users = await User.find();
-      res.render("index", { users });
-    } catch (err) {
-      console.error("Error in /index route:", err);
-      res.status(500).send("Internal Server Error");
-    }
-  });
-  
-  // ...
-  
+  res.render("login", { style: loginPageStyle });
+});
 
+// Handle login POST request at the /login path
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Check if the username and password are correct
+  if (username === "admin" && password === "admin") {
+    // Successful login
+    res.redirect("/");
+  } else {
+    // Failed login
+    res.send("Admin login failed. Please check your credentials.");
+  }
+});
+
+// Index page route
+app.get("/", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.render("index", { users, style: indexPageStyle });
+  } catch (err) {
+    console.error("Error in /index route:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Add page route
 app.get("/add", (req, res) => {
-  res.render("add");
+  res.render("add", { style: formStyle });
 });
 
 app.post("/add", async (req, res) => {
@@ -79,10 +101,11 @@ app.post("/add", async (req, res) => {
   }
 });
 
+// Edit page route
 app.get("/edit/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.render("edit", { user });
+    res.render("edit", { user, style: formStyle });
   } catch (err) {
     console.error("Error in /edit/:id route:", err);
     res.status(500).send("Internal Server Error");
@@ -100,6 +123,7 @@ app.post("/edit/:id", async (req, res) => {
   }
 });
 
+// Delete page route
 app.get("/delete/:id", async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);

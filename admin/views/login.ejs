@@ -6,50 +6,65 @@
     <title>Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ccc; /* Add a border */
         }
 
         h1 {
             background-color: #007BFF;
             color: #fff;
             padding: 20px;
-            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            margin: 0;
+            font-size: 24px; /* Increase font size */
         }
 
         form {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
 
         label {
             display: block;
             font-weight: bold;
             margin-top: 10px;
+            color: #555; /* Adjust label text color */
         }
 
         input[type="text"],
         input[type="password"] {
-            width: 100%;
-            padding: 10px;
+            width: 90%;
+            padding: 12px; /* Increase padding for better input size */
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
+            font-size: 30px; /* Increase font size for better readability */
         }
 
         button[type="submit"] {
             background-color: #007BFF;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px; /* Increase padding for better button size */
             border-radius: 3px;
             cursor: pointer;
+            font-size: 16px; /* Increase font size for better readability */
         }
 
         button[type="submit"]:hover {
@@ -58,13 +73,15 @@
     </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="POST" action="/login">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="POST" action="/login">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
